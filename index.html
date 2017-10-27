@@ -11,16 +11,16 @@
         <div class="reveal">
             <div class="slides">
 
-                <section class="title-slide">
-                  <h1>The &lt;script&gt; tag: At the bottom of everything</h1>
-                  <h3>Casey A. Ydenberg</h3>
-                  <p><i class="fa fa-twitter"></i> @CAYdenberg</p>
-                  <p><i class="fa fa-github"></i> CAYdenberg</p>
-                  <p><i class="fa fa-envelope-o"></i> ydenberg@gmail.com</p>
-                  <p><i class="fa fa-globe"></i> caseyy.org</p>
-                </section>
+              <section class="title-slide">
+                <h1>The &lt;script&gt; tag: At the bottom of everything</h1>
+                <h3>Casey A. Ydenberg</h3>
+                <p><i class="fa fa-twitter"></i> @CAYdenberg</p>
+                <p><i class="fa fa-github"></i> CAYdenberg</p>
+                <p><i class="fa fa-envelope-o"></i> ydenberg@gmail.com</p>
+                <p><i class="fa fa-globe"></i> caseyy.org</p>
+              </section>
 
-                <section>
+              <section>
                   <div>
                     <h2>JavaScript Hello World</h2>
                     <pre><code class="html">
@@ -52,7 +52,30 @@
               </section>
 
               <section>
-                <h2>JavaScript slows the HTML parser</h2>
+                <h2>Body and src attributes</h2>
+                <script type="text/javascript">
+                  // some javascript
+                </script>
+                <script type="text/javascript" src="./my-script.js"></script>
+
+                <!-- DON'T DO THIS-->
+                <script type="text/javascript" src="./my-script.js">
+                  // some code
+                </script>
+
+                <!-- OR THIS-->
+                <script type="text/javascript" src="./my-script.js" />
+              </section>
+
+              <section>
+                <h2>JavaScript pauses the HTML parser</h2>
+                <div style="width: 75%; margin-left: auto; margin-right: auto">
+                  <img src="./images/script.svg" />
+                </div>
+              </section>
+
+              <section>
+                <h2>JavaScript pauses the HTML parser</h2>
 
                 <table>
                   <tr><th></th>           <th></th>          <th colspan="2">DOMContentLoaded</th></tr>
@@ -67,13 +90,132 @@
               </section>
 
               <section>
-                <img src="./images/html-parser.svg" />
+                <h2>The async and defer attributes</h2>
+                <div>
+                  <pre><code class="html">&lt;script async src="app.js"&gt;&lt;/script&gt;</code></pre>
+                  <div style="width: 75%; margin-left: auto; margin-right: auto">
+                    <img src="./images/async.svg" />
+                  </div>
+                </div>
+
+                <div class="fragment">
+                  <pre><code class="html">&lt;script defer src="app.js"&gt;&lt;/script&gt;</code></pre>
+                  <div style="width: 75%; margin-left: auto; margin-right: auto">
+                    <img src="./images/defer.svg" />
+                  </div>
+                </div>
               </section>
-<!--
-https://jakearchibald.com/2017/es-modules-in-browsers/
-https://calendar.perfplanet.com/2016/prefer-defer-over-async/
-https://hackernoon.com/native-es-modules-ready-for-prime-time-87c64d294d3c
--->
+
+              <section>
+                <h2>Main body of scripts use global variables</h2>
+                <div class="half">
+                  <pre><code class="html">
+                  </code></pre>
+
+                  <button type="button" id="btn-trick">Trick or treat</button>
+                  <script>
+                    var trick = "Boo!"
+                  </script>
+                  <script>
+                    document.getElementById('btn-trick').addEventListener('click', function() {
+                      alert(trick)
+                    })
+                  </script>
+                </div>
+
+                <div class="half fragment">
+                  <pre><code class="html">
+                  </code></pre>
+
+                  <button type="button" id="btn-treat">Trick or treat</button>
+                  <script>
+                    (function() {
+                      var treat = "I was working in the lab late one night When my eyes beheld an eerie sight When my monster, from its slab, began to rise And suddenly to my surprise"
+                    })()
+                  </script>
+                  <script>
+                    document.getElementById('btn-treat').addEventListener('click', function() {
+                      alert(treat)
+                    })
+                  </script>
+                </section>
+
+                <section>
+                  <h2>The type attribute</h2>
+                  <div class="half">
+                    <pre><code class="html">
+                    </code></pre>
+
+                    <button type="button" id="btn-module">Trick or treat</button>
+                    <script type="module">
+                      var moduleTrick = "Boo!"
+                    </script>
+                    <script>
+                      document.getElementById('btn-module').addEventListener('click', function() {
+                        alert(moduleTrick)
+                      })
+                    </script>
+                  </div>
+
+                  <div class="half fragment">
+                    <pre><code class="html">
+                    </code></pre>
+
+                    <button type="button" id="run-not-js">Run non-JS script?</button>
+                    <script type="text/notjs">
+                      document.getElementById('run-not-js').addEventListener('click', function() {
+                        alert("hello world!")
+                      })
+                    </script>
+                  </div>
+                </section>
+
+                <section>
+                  <h2>What are modules?</h2>
+                  <div class="half">
+                    <pre><code class="javascript">
+                    </code></pre>
+                  </div>
+                  <div class="half">
+                    <pre><code class="javascript">
+                    </code></pre>
+
+                    <button id="pick-candy">Pick Candy</button>
+                    <script type="module">
+                      import pickCandy, {typesOfCandy} from './myModule.js'
+
+                      document.getElementById('pick-candy').addEventListener('click', function() {
+                        const candy = pickCandy()
+                        alert(candy)
+                      })
+                    </script>
+                  </div>
+                </section>
+
+                <section>
+                  <h2>Can I use modules today?</h2>
+                  <p>Yes! ... with webpack or browserify</p>
+                  <p class="fragment">
+                    <a href="https://caniuse.com/#search=modules" target="_blank">Browser support</a>
+                    so far is mixed, but you can use additional <code>&lt;script nomodule&rt;</code> tag to support other browsers.
+                  </p>
+                  <p class="fragment">Barriers to using native modules:</p>
+                  <ul class="fragment">
+                    <li>Lots of HTTP requests (HTTP/2 to the rescue!)</li>
+                    <li class="fragment">Can only "import" a URL</li>
+                  </ul>
+                </section>
+
+                <section>
+                  <h2>Further information</h2>
+                  <ul>
+                    <li>https://jakearchibald.com/2017/es-modules-in-browsers/</li>
+                    <li>https://hackernoon.com/native-es-modules-ready-for-prime-time-87c64d294d3c</li>
+                    <li>https://calendar.perfplanet.com/2016/prefer-defer-over-async/</li>
+                    <li>http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html</li>
+                  </ul>
+                </section>
+
             </div>
         </div>
 

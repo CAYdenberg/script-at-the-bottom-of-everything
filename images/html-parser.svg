@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.2" viewBox="0 0 15000 5000" xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <g class="SlideGroup">
+  <g>
+   <g id="id1" class="Slide" clip-path="url(#presentation_clip_path)">
+    <g class="Page">
+     <g class="com.sun.star.drawing.CustomShape">
+      <g id="id3">
+       <rect class="BoundingBox" stroke="none" fill="none" x="1065" y="2099" width="5603" height="603"/>
+       <path fill="rgb(114,159,207)" stroke="none" d="M 3866,2700 L 1066,2700 1066,2100 6666,2100 6666,2700 3866,2700 Z"/>
+       <path fill="none" stroke="rgb(52,101,164)" d="M 3866,2700 L 1066,2700 1066,2100 6666,2100 6666,2700 3866,2700 Z"/>
+      </g>
+     </g>
+     <g class="com.sun.star.drawing.CustomShape">
+      <g id="id4">
+       <rect class="BoundingBox" stroke="none" fill="none" x="6665" y="2699" width="1903" height="603"/>
+       <path fill="orange" stroke="none" d="M 7616,3300 L 6666,3300 6666,2700 8566,2700 8566,3300 7616,3300 Z"/>
+       <path fill="none" stroke="orange" d="M 7616,3300 L 6666,3300 6666,2700 8566,2700 8566,3300 7616,3300 Z"/>
+      </g>
+     </g>
+     <g class="com.sun.star.drawing.CustomShape">
+      <g id="id5">
+       <rect class="BoundingBox" stroke="none" fill="none" x="10165" y="2099" width="3703" height="603"/>
+       <path fill="rgb(114,159,207)" stroke="none" d="M 12016,2700 L 10166,2700 10166,2100 13866,2100 13866,2700 12016,2700 Z"/>
+       <path fill="none" stroke="rgb(52,101,164)" d="M 12016,2700 L 10166,2700 10166,2100 13866,2100 13866,2700 12016,2700 Z"/>
+      </g>
+     </g>
+     <g class="com.sun.star.drawing.CustomShape">
+      <g id="id6">
+       <rect class="BoundingBox" stroke="none" fill="none" x="8565" y="2699" width="1603" height="603"/>
+       <path fill="rgb(0,255,255)" stroke="none" d="M 9366,3300 L 8566,3300 8566,2700 10166,2700 10166,3300 9366,3300 Z"/>
+       <path fill="none" stroke="orange" d="M 9366,3300 L 8566,3300 8566,2700 10166,2700 10166,3300 9366,3300 Z"/>
+      </g>
+     </g>
+     <g class="com.sun.star.drawing.LineShape">
+      <g id="id7">
+       <rect class="BoundingBox" stroke="none" fill="#fff" x="6665" y="2399" width="3503" height="3"/>
+       <path fill="none" stroke="#fff" d="M 6666,2400 L 10166,2400"/>
+      </g>
+     </g>
+     <g class="com.sun.star.drawing.TextShape">
+      <g id="id8">
+       <rect class="BoundingBox" stroke="none" fill="none" x="1566" y="1100" width="4457" height="963"/>
+       <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="635px" font-weight="400"><tspan class="TextPosition" x="1816" y="1801"><tspan fill="#fff" stroke="none">HTML parsing</tspan></tspan></tspan></text>
+      </g>
+     </g>
+     <g class="com.sun.star.drawing.TextShape">
+      <g id="id9">
+       <rect class="BoundingBox" stroke="none" fill="none" x="4889" y="3338" width="3678" height="963"/>
+       <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="635px" font-weight="400"><tspan class="TextPosition" x="5139" y="4039"><tspan fill="#fff" stroke="none">Script fetch</tspan></tspan></tspan></text>
+      </g>
+     </g>
+     <g class="com.sun.star.drawing.TextShape">
+      <g id="id10">
+       <rect class="BoundingBox" stroke="none" fill="none" x="8889" y="3338" width="5012" height="963"/>
+       <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="635px" font-weight="400"><tspan class="TextPosition" x="9139" y="4039"><tspan fill="#fff" stroke="none">Script execution</tspan></tspan></tspan></text>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>

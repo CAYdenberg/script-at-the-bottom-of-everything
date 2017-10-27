@@ -12,7 +12,7 @@
             <div class="slides">
 
                 <section class="title-slide">
-                  <h1>JavaScript Beginner Series:<br /> What is a Promise?</h1>
+                  <h1>The &lt;script&gt; tag: At the bottom of everything</h1>
                   <h3>Casey A. Ydenberg</h3>
                   <p><i class="fa fa-twitter"></i> @CAYdenberg</p>
                   <p><i class="fa fa-github"></i> CAYdenberg</p>
@@ -20,291 +20,60 @@
                   <p><i class="fa fa-globe"></i> caseyy.org</p>
                 </section>
 
-
-
                 <section>
-                  <img src="./images/el-mike.jpeg" />
-
-                  <div class="text-left">
-                    <p><strong>Eleven: </strong>Promise?</p>
-                    <p><strong>Mike: </strong>It's something you can't break. Ever.</p>
-                  </div>
-                </section>
-
-
-
-                <section>
-                  <img src="./images/pandas.jpg" />
-
-                  <blockquote>
-                    We are committed to ensuring that 2015 will be the last federal election conducted under the first-past-the-post voting system.
-                  </blockquote>
-
-                </section>
-
-
-                <section>
-                  <h2>What is a Promise?</h2>
-
-                  <blockquote>
-                    A promise is a container for an asynchronously delivered value
-                    <footer>
-                      -- Dr. Alex Rauschmayer
-                    </footer>
-                  </blockquote>
-                </section>
-
-
-                <section>
-                  <h2>Recap: Synchronous vs asynchonous code</h2>
-
-                  <h3>In <strong>PHP:</strong></h3>
-                  <pre><code class="php">
-$data = file_get_contents('http://a/resource/somewhere');
-                  </code></pre>
-
-                  <div class="fragment">
-                    <h3>In <strong>JavaScript:</strong></h3>
-                    <pre><code class="javascript">
-  http.get('http://a/resource/somewhere', function(res) {
-    // deal with response
-  });
+                  <div>
+                    <h2>JavaScript Hello World</h2>
+                    <pre><code class="html">
+&lt;!doctype html&gt;<br/>&lt;html&gt;<br/>  &lt;body&gt;<br/>    &lt;div id=&quot;output&quot;&gt;&lt;/div&gt;<br/>    &lt;script&gt;<br/>      document.getElementById('output').innerHTML = 'Hello, world!'<br/>    &lt;/script&gt;<br/>  &lt;/body&gt;<br/>&lt;/html&gt;
                     </code></pre>
                   </div>
 
-                </section>
-
-
-
-
-                <section>
-                  <h2>Callbacks vs Promises</h2>
-
-                  <div class="2-col">
-                    <div class="column">
-                      <h3>Callback</h3>
-                      <pre><code class="javascript">
-http.get('http://a/resource/somewhere', function(res) {
-  // deal with response
-});
-                      </code></pre>
-                    </div>
-
-                    <div class="column">
-                      <h3>Promise</h3>
-                      <pre><code class="javascript">
-httpPromise.get('http://a/resource/somewhere').then(function(res) {
-  // deal with response
-});
-                      </code></pre>
-                    </div>
+                  <div class="fragment">
+                    <h2>Super-fancy SPA</h2>
+                    <pre><code class="html">
+<!doctype html>
+<script src="/static/app.js"></script>
+                    </code></pre>
                   </div>
-
-                  <h3>Advantages</h3>
-                  <ul>
-                    <li class="fragment">Readability</li>
-                    <li class="fragment">Dealing with errors</li>
-                    <li class="fragment">Chaining and returning</li>
-                  </ul>
-
-                </section>
-
-
-
-
-                <section>
-                  <h2>Types of Promises</h2>
-                  <ul>
-                    <li>jQuery deferred (https://api.jquery.com/category/deferred-object/)</li>
-                    <li>Q (https://github.com/kriskowal/q)</li>
-                    <li>Bluebird (https://github.com/petkaantonov/bluebird)
-                    <li><strong>ES6/A+ specification</strong></li>
-                  </ul>
-
-                  <h3>Can I use it?</h3>
-                  <img src="./images/browser-support.png" width="440" />
-
-                  <p>Since Node.js 0.12</p>
-
-                  <p><strong>Polyfill:</strong> https://github.com/stefanpenner/es6-promise</p>
-
-                  <p>... Babel</p>
-                </section>
-
-
-
-
-                <section>
-                  <h2>Creating Promises</h2>
-                  <pre><code class="javascript">
-function wait(time) {
-  return new Promise(function(resolve) {
-
-    setTimeout(function() {
-      resolve('You kept your Promise!');
-    }, time);
-
-  });
-}
-
-wait(1000).then(function(msg) {
-   console.log(msg)
-});
-                  </code></pre>
-                  <pre class="fragment"><code class="javascript">
-function fetchUrl(url) {
-  return new Promise(function(resolve, reject) {
-    http.get(url, function(response) {
-      if (response.status === 200) {
-        return resolve(response.body);
-      else {
-        return reject(Error('Not Found'));
-      }
-    });
-  });
-}
-                  </code></pre>
-                </section>
-
-
-                <section>
-                  <h2>Using Promises</h2>
-                  <pre><code class="javascript">
-const url = 'https://api.forecast.io/forecast/APIKEY/50.1149639,-122.9486474';
-fetchUrl(url).then(function(res) {
-  console.log('The current temperature is ' + res.body.currently.temperature);
-}, function(err) {
-  console.log(err)
-});
-                  </code></pre>
-                  <p>... or ...</p>
-                  <pre class="fragment"><code class="javascript">
-fetchUrl(url).then(function(res) {
-  console.log('The current temperature is ' + res.body.currently.temperature);
-}).catch(function(err) {
-  console.log(err)
-});
-                  </code></pre>
-                </section>
-
-
-
-
-
-
-                <section>
-                  <h2>The real power: multiple async operations</h2>
-                  <p>Imagine you're getting some data from a database, and then processing it asynchonously:</p>
-                  <pre><code class="javascript">
-getDataFromDb(params, function(data) {
-  processData(data, function(processedData) {
-    // deal with data
-  });
-});
-                  </code></pre>
-
-                  <p>If we encapsulate this logic in a function, what do we return?</p>
-
-                </section>
-
-
-                <section>
-                  <h2>Wrap everything in a single promise</h2>
-                  <pre><code class="javascript">
-function queryDb(params) {
-  return new Promise(resolve, reject) {
-
-    getDataFromDb(params, function(data) {
-      getMoreDataFromDb(data, function(processedData) {
-        resolve(processedData);
-      });
-    });
-
-  });
-}
-
-queryDb.then(...);
-                </code></pre>
               </section>
-
-
 
               <section>
-                <h2>Chaining promises</h2>
-                <p><code class="javascript">.then</code> always returns another promise. Very useful.</p>
+                <h2>Not the norm!</h2>
 
-                <pre><code class="javascript">
-myPromise.then(function(dataOne) {
-  // process dataOne and create another promise
-  return myOtherPromise(dataOne);
-}).then(function(dataTwo) {
-  // do something with dataTwo
-});
-                </code></pre>
-                <p>Chaining advantages:</p>
-                <ul>
-                  <li>Break the chain anywhere and return. Separate logic based on what makes sense.</li>
-                  <li><code class="javascript">.catch</code> at the end will handle error anywhere in the chain.</li>
-                  <li>You can return another promise but deal with the <em>result</em> of that promise.</li>
-                </ul>
+                <table>
+                  <tr><th></th>           <th># scripts</th></tr>
+                  <tr><th>cbc.ca</th>     <td>31</td> </tr>
+                  <tr><th>nytimes.com</th><td>119</td> </tr>
+                  <tr><th>edmontonjournal.com</th><td>113</td></tr>
+                  <tr><th>epl.ca</th>     <td>44</td></tr>
+                  <tr><th>meetup.com</th> <td>32</td></tr>
+                  <tr><th>exchangejs.com</th><td>9</td> </tr>
+                </table>
               </section>
-
-
 
               <section>
-                <h2>Parallel Promises</h2>
-                <pre><code class="javascript">
-var p1 = Promise.resolve(3);
-var p2 = 1337;
-var p3 = new Promise(function(resolve, reject) {
-  setTimeout(function() {
-    return "Resolved"
-  }, 1000);
-});
+                <h2>JavaScript slows the HTML parser</h2>
 
-Promise.all([p1, p2, p3]).then(function(values) {
-  console.log(values); // [3, 1337, "Resolved"]
-});
-
-                </code></pre>
+                <table>
+                  <tr><th></th>           <th></th>          <th colspan="2">DOMContentLoaded</th></tr>
+                  <tr><th></th>           <th># scripts</th> <th>JS</th>              <th>No JS</tr>
+                  <tr><th>cbc.ca</th>     <td>31</td>        <td>1.05 s</td>          <td>375 ms</td></tr>
+                  <tr><th>nytimes.com</th><td>119</td>       <td>2.63 s</td>          <td>722 ms</td></tr>
+                  <tr><th>edmontonjournal.com</th><td>113</td> <td>2.65 s</td>        <td>897 ms</td></tr>
+                  <tr><th>epl.ca</th>     <td>44</td>        <td>1.24 s</td>          <td>637 ms</td></tr>
+                  <tr><th>meetup.com</th> <td>32</td>        <td>2.68 s</td>          <td>2.53 s</td></tr>
+                  <tr><th>exchangejs.com</th><td>9</td>         <td>977 ms</td>          <td>574 ms</tr>
+                </table>
               </section>
-
 
               <section>
-                <h2>... but don't forget to catch</h2>
-                <blockquote>
-                  <p>What the actual flying fuck? Promises swallows errors by default! Who&rsquo;s idea was that?</p>
-                  <footer>-- Reddit user /u/ledp</footer>
-                </blockquote>
-
-                <pre><code class="javascript">
-new Promise(function(resolve, reject) {
-  resolve('promised value');
-}).then(function(value) {
-  throw Error('error');
-})<span class="fragment">.catch(function(error) {
-  console.error(error.stack);
-});</span>
-                </code></pre>
-                <p>http://jamesknelson.com/are-es6-promises-swallowing-your-errors/</p>
-
+                <img src="./images/html-parser.svg" />
               </section>
-
-
-
-
-              <section>
-                <h2>Acknowledgements</h2>
-                <ul>
-                  <li><a href="https://developers.google.com/web/fundamentals/getting-started/primers/promises">Jake Archibald</a></li>
-                  <li><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise">MDN</a></li>
-                  <li><a href="http://jamesknelson.com/are-es6-promises-swallowing-your-errors/">James K. Nelson</a></li>
-                </ul>
-              </section>
-
-
-
-
+<!--
+https://jakearchibald.com/2017/es-modules-in-browsers/
+https://calendar.perfplanet.com/2016/prefer-defer-over-async/
+https://hackernoon.com/native-es-modules-ready-for-prime-time-87c64d294d3c
+-->
             </div>
         </div>
 

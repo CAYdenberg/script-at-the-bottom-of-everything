@@ -4,11 +4,27 @@
   color: orange;
 }
 
-.fa {
+.reveal h2 {
+  font-size: 1.5em;
   color: orange;
 }
 
-.reveal strong {
+.reveal h3 {
+  font-size: 1.33em;
+  font-weight: 400;
+}
+
+img {
+  display: block;
+}
+
+.reveal pre code {
+  font-size: 0.9em;
+  max-height: 600px;
+}
+
+.reveal strong ,
+.fa {
   color: orange;
 }
 
@@ -23,4 +39,30 @@
 .reveal blockquote {
   border-left: 5px solid orange;
   padding-left: 25px;
+}
+
+.half {
+  float: left;
+  width: 50%;
+}
+
+.one-third {
+  float: left;
+  width: 33%;
+}
+
+.two-thirds {
+  float: left;
+  width: 66%
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.reveal table {
+  color: white;
+}
+.reveal table th, .reveal table td {
+  font-size: 1.5rem;
 }

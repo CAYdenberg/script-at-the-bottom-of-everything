@@ -31,8 +31,8 @@
                   <div class="fragment">
                     <h2>Super-fancy SPA</h2>
                     <pre><code class="html">
-<!doctype html>
-<script src="/static/app.js"></script>
+&lt;!doctype html&gt;
+&lt;script src=&quot;/static/app.js&quot;&gt;&lt;/script&gt;
                     </code></pre>
                   </div>
               </section>
@@ -53,18 +53,28 @@
 
               <section>
                 <h2>Body and src attributes</h2>
-                <script type="text/javascript">
-                  // some javascript
-                </script>
-                <script type="text/javascript" src="./my-script.js"></script>
+                <pre><code class="html">
+&lt;script type="text/javascript"&gt;
+  // some javascript
+&lt;/script&gt;
+                </code></pre>
+                <pre><code class="html">
+&lt;script type="text/javascript" src="./my-script.js"&gt;&lt;/script&gt;
+                </code></pre>
+<script type="text/javascript" src="./my-script.js"></script>
 
-                <!-- DON'T DO THIS-->
-                <script type="text/javascript" src="./my-script.js">
-                  // some code
-                </script>
+                <div class="fragment">
+                  <pre><code class="html">
+&lt;!-- DON'T DO THIS--&gt;
+&lt;script type="text/javascript" src="./my-script.js"&gt;
+  // some code
+&lt;/script&gt;
 
-                <!-- OR THIS-->
-                <script type="text/javascript" src="./my-script.js" />
+&lt;!-- OR THIS--&gt;
+&lt;script type="text/javascript" src="./my-script.js" /&gt;
+                  </code></pre>
+                  <p><a href="https://stackoverflow.com/questions/69913/why-dont-self-closing-script-tags-work#answer-28719226">(Why don't self-closing script tags work?)</a></p>
+                </div>
               </section>
 
               <section>
@@ -108,8 +118,17 @@
 
               <section>
                 <h2>Main body of scripts use global variables</h2>
-                <div class="half">
+                <div>
                   <pre><code class="html">
+&lt;button type="button" id="btn-trick"&gt;Trick or treat&lt;/button&gt;
+&lt;script&gt;
+  var trick = "Boo!"
+&lt;/script&gt;
+&lt;script&gt;
+  document.getElementById('btn-trick').addEventListener('click', function() {
+    alert(trick)
+  })
+&lt;/script&gt;
                   </code></pre>
 
                   <button type="button" id="btn-trick">Trick or treat</button>
@@ -123,8 +142,19 @@
                   </script>
                 </div>
 
-                <div class="half fragment">
+                <div class="fragment">
                   <pre><code class="html">
+&lt;button type="button" id="btn-treat"&gt;Trick or treat&lt;/button&gt;
+&lt;script&gt;
+  (function() {
+    var treat = "I was working in the lab late one night When my eyes beheld an eerie sight When my monster, from its slab, began to rise And suddenly to my surprise"
+  })()
+&lt;/script&gt;
+&lt;script&gt;
+  document.getElementById('btn-treat').addEventListener('click', function() {
+    alert(treat)
+  })
+&lt;/script&gt;
                   </code></pre>
 
                   <button type="button" id="btn-treat">Trick or treat</button>
@@ -142,8 +172,17 @@
 
                 <section>
                   <h2>The type attribute</h2>
-                  <div class="half">
+                  <div>
                     <pre><code class="html">
+&lt;button type="button" id="btn-module"&gt;Trick or treat&lt;/button&gt;
+&lt;script type="module"&gt;
+  var moduleTrick = "Boo!"
+&lt;/script&gt;
+&lt;script&gt;
+  document.getElementById('btn-module').addEventListener('click', function() {
+    alert(moduleTrick)
+  })
+&lt;/script&gt;
                     </code></pre>
 
                     <button type="button" id="btn-module">Trick or treat</button>
@@ -157,8 +196,14 @@
                     </script>
                   </div>
 
-                  <div class="half fragment">
+                  <div class="fragment">
                     <pre><code class="html">
+&lt;button type="button" id="run-not-js"&gt;Run non-JS script?&lt;/button&gt;
+&lt;script type="text/notjs"&gt;
+  document.getElementById('run-not-js').addEventListener('click', function() {
+    alert("hello world!")
+  })
+&lt;/script&gt;
                     </code></pre>
 
                     <button type="button" id="run-not-js">Run non-JS script?</button>
@@ -172,12 +217,28 @@
 
                 <section>
                   <h2>What are modules?</h2>
-                  <div class="half">
+                  <div>
                     <pre><code class="javascript">
+// myModule.js
+//
+export const typesOfCandy = ['smarties', 'rockets', 'M&Ms', 'toothpaste']
+
+export default function() {
+  return typesOfCandy[Math.floor(Math.random() * typesOfCandy.length)]
+}
                     </code></pre>
                   </div>
-                  <div class="half">
+                  <div>
                     <pre><code class="javascript">
+&lt;button id="pick-candy"&gt;Pick Candy&lt;/button&gt;
+&lt;script type="module"&gt;
+  import pickCandy, {typesOfCandy} from './myModule.js'
+
+  document.getElementById('pick-candy').addEventListener('click', function() {
+    const candy = pickCandy()
+    alert(candy)
+  })
+&lt;/script&gt;
                     </code></pre>
 
                     <button id="pick-candy">Pick Candy</button>
@@ -197,7 +258,7 @@
                   <p>Yes! ... with webpack or browserify</p>
                   <p class="fragment">
                     <a href="https://caniuse.com/#search=modules" target="_blank">Browser support</a>
-                    so far is mixed, but you can use additional <code>&lt;script nomodule&rt;</code> tag to support other browsers.
+                    so far is mixed, but you can use additional <code>&lt;script nomodule&gt;</code> tag to support other browsers.
                   </p>
                   <p class="fragment">Barriers to using native modules:</p>
                   <ul class="fragment">
@@ -209,10 +270,10 @@
                 <section>
                   <h2>Further information</h2>
                   <ul>
-                    <li>https://jakearchibald.com/2017/es-modules-in-browsers/</li>
-                    <li>https://hackernoon.com/native-es-modules-ready-for-prime-time-87c64d294d3c</li>
-                    <li>https://calendar.perfplanet.com/2016/prefer-defer-over-async/</li>
-                    <li>http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html</li>
+                    <li><a href="https://jakearchibald.com/2017/es-modules-in-browsers/">ECMAScript modules in browsers <em>Jake Archibald</em></a></li>
+                    <li><a href="https://hackernoon.com/native-es-modules-ready-for-prime-time-87c64d294d3c">Native ES Modules — Ready for Prime Time? <em>Gil Tayer</em></a></li>
+                    <li><a href="http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html">async vs defer attributes <em>Daniel Imms</em></li>
+                    <li><a href="https://calendar.perfplanet.com/2016/prefer-defer-over-async/">Prefer DEFER over ASYNC <em>Steve Souders</em></a></li>
                   </ul>
                 </section>
 
